@@ -11,3 +11,7 @@
   --color-border-primary: #e0e0e0;
   --color-border-secondary: #e5e5e5;
 }
+
+body {
+  @apply text-primary-txt;
+}

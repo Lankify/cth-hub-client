@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './layouts';
-import {Dashboard, HotelRates} from './pages';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./layouts";
+import { Dashboard, HotelRates, Inventory, AddInventory } from "./pages";
 
 function App() {
   return (
@@ -9,7 +9,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="hotels" element={<HotelRates />} />
-          {/* Add more pages as needed */}
+          <Route path="inventory" element={<Inventory />} />
+          <Route path="/inventory/new-item" element={<AddInventory />} />
         </Route>
       </Routes>
     </BrowserRouter>
