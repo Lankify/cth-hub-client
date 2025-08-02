@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Typography } from "@mui/material";
 import { Button, SelectionTab, Table, ActionButtons, ConfirmDialog, useToast } from "../../components";
-import { ViewItemDetails, EditInventory } from "../../pages";
+import { ViewItemDetails, EditInventory } from "..";
 import type { IInventory } from "../../types";
 import { MdLibraryAdd } from "react-icons/md";
 
