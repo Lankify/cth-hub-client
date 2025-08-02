@@ -35,14 +35,14 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-secondary/80 ${width} ${height} p-4 transition-all duration-200 ${shadowMap[shadowLevel]} ${hoverEffect ? "hover:scale-[1.02] hover:shadow-xl" : ""} rounded-${rounded} ${className}`}
+      className={`bg-secondary ${width} ${height} p-4 transition-all duration-200 ${shadowMap[shadowLevel]} ${hoverEffect ? "hover:scale-[1.02] hover:shadow-xl" : ""} rounded-${rounded} ${className}`}
     >
       {(icon || title || subtitle) && (
-        <div className="flex items-center gap-3 mb-3">
+        <div className="mb-3 flex items-center gap-3">
           {icon && <div className="text-xl">{icon}</div>}
           <div>
             {title && <h3 className="text-lg font-semibold">{title}</h3>}
-            {subtitle && <p className="text-sm text-secondary-txt">{subtitle}</p>}
+            {subtitle && <p className="text-secondary-txt text-sm">{subtitle}</p>}
           </div>
         </div>
       )}

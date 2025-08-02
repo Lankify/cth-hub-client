@@ -3,7 +3,7 @@ import { FiBell, FiSettings, FiSearch } from "react-icons/fi";
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-primary sticky top-0 z-10 flex items-center justify-between px-6 py-4 shadow-sm">
+    <header className="bg-primary sticky top-0 z-10 flex items-center justify-between px-6 py-4">
       {/* Left: Search Bar with Icon */}
       <div className="max-w-md flex-1">
         <div className="relative">

@@ -2,14 +2,20 @@
 
 @theme {
   --color-primary: #141828;
-  --color-secondary: #1d2438;
+  --color-secondary: #1b2235;
+  --color-tertiary: #141f35;
   --color-neutral: #2b5cfd;
 
   --color-primary-txt: #ffffff;
   --color-secondary-txt: #a0aec0;
+  --color-neutral-txt: #718096;
 
   --color-border-primary: #e0e0e0;
   --color-border-secondary: #e5e5e5;
+
+  --color-primary-blue: #0078ff;
+  --color-primary-green: #8bc34a;
+  --color-primary-red: #ff0000;
 }
 
 body {

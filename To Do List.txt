@@ -1,0 +1,28 @@
+## Inventory ##
+
+sidebar 
+when select dropdown should also appear
+
+AddInventory
+Replace Assigned to Input field with Dropdown (use Staff from DB)
+Categories need to fetch from db
+error message beklow Iputfield m=for mandatory data
+Some Mobile Devices dont have S/N
+
+EditInventory
+Include Droposown for Ssigend to Edit Form 
+reset assigend to with staus
+
+
+
+Item Categories
+View Table + Add Button --> Popup Model to create new category
+
+API - Backend
+
+After Inventory all functions are implement do a GitHub Push
+
+
+
+
+If Error occured in AddInventory --> add new line in line 55 and chaneg cloudiary settings--> uplaod --> unsiged-preset--> folder --> remove folder 

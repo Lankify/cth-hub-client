@@ -7,6 +7,8 @@ interface CustomButtonProps {
   onClick?: () => void;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  bgColor?: string; // NEW
+  hoverColor?: string; // NEW
   [key: string]: any;
 }
 
@@ -16,10 +18,15 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   onClick,
   startIcon,
   endIcon,
+  bgColor,
+  hoverColor,
   ...props
 }) => {
-  const bgColor = variant === "primary" ? "#2b5cfd" : "#1d2438";
-  const hoverColor = variant === "primary" ? "#1f49d1" : "#161c2b";
+  const defaultBgColor = variant === "primary" ? "#2b5cfd" : "#2b3549";
+  const defaultHoverColor = variant === "primary" ? "#1f49d1" : "#262f41";
+
+  const appliedBgColor = bgColor || defaultBgColor;
+  const appliedHoverColor = hoverColor || defaultHoverColor;
 
   return (
     <Button
@@ -27,13 +34,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       startIcon={startIcon}
       endIcon={endIcon}
       sx={{
-        backgroundColor: bgColor,
+        backgroundColor: appliedBgColor,
         color: "white",
         borderRadius: "2px",
         boxShadow: 2,
         textTransform: "none",
         "&:hover": {
-          backgroundColor: hoverColor,
+          backgroundColor: appliedHoverColor,
           transform: "scale(1.02)",
         },
         "&:active": {
