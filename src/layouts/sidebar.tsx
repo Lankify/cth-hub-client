@@ -17,13 +17,12 @@ const Sidebar: React.FC = () => {
 
   const toggleSubMenu = (title: string) => {
     setOpenMenus(prev => ({
-      ...prev,
       [title]: !prev[title],
     }));
   };
 
   return (
-    <div className="fixed top-0 left-0 z-20 h-screen p-5 shadow-md bg-secondary w-70 shadow-black/10">
+    <div className="bg-secondary fixed top-0 left-0 z-20 h-screen w-70 p-5 shadow-md shadow-black/10">
       <div className="mb-10">
         {/* <img src={logo} alt="CTH Hub Logo" className="object-contain w-auto" /> */}
         <img src={logo} alt="CTH Hub Logo" className="ml-1 w-38" />
@@ -46,16 +45,17 @@ const Sidebar: React.FC = () => {
                       : "hover:text-primary-txt hover:bg-white/5"
                   }`}
                 >
-                  <Link to={item.navigation} className="flex items-center flex-grow gap-2">
+                  <Link
+                    to={item.navigation}
+                    onClick={() => hasSubMenu && toggleSubMenu(item.title)}
+                    className="flex flex-grow items-center gap-2"
+                  >
                     <span className="text-lg">{iconMap[item.title] || <span className="w-5" />}</span>
                     <span>{item.title}</span>
                   </Link>
 
                   {hasSubMenu && (
-                    <div
-                      onClick={() => toggleSubMenu(item.title)}
-                      className="p-1 text-sm transition-transform cursor-pointer hover:opacity-80"
-                    >
+                    <div className="p-1 text-sm">
                       <FiChevronDown
                         className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                       />
@@ -65,7 +65,7 @@ const Sidebar: React.FC = () => {
 
                 {/* Submenu */}
                 {hasSubMenu && isOpen && (
-                  <ul className="mt-2 space-y-2 ml-7">
+                  <ul className="mt-2 ml-7 space-y-2">
                     {item.subLinks?.map(sub => (
                       <li key={sub.navigation}>
                         <Link
