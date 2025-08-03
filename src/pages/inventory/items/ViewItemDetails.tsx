@@ -1,4 +1,4 @@
-import type { IInventory } from "../../types";
+import type { IInventory } from "../../../types";
 import { FaImage } from "react-icons/fa";
 
 interface Props {
@@ -97,7 +97,7 @@ const ViewItemDetails: React.FC<Props> = ({ data }) => {
         </div>
       </div>
 
-      <div className={mainContainerStyle}>
+      <div className={`${mainContainerStyle} bg-tertiary`}>
         <div>
           <div className={labelStyle}>Created :</div>
           <div className={valueStyle}>{formatDate(data.createdAt)}</div>

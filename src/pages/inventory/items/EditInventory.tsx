@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import type { IInventory } from "../../types";
-import { InputField, DatePickerField, DropdownField } from "../../components";
+import type { IInventory } from "../../../types";
+import { InputField, DatePickerField, DropdownField } from "../../../components";
 import type { SelectChangeEvent } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CloseIcon from "@mui/icons-material/Close";
@@ -64,7 +64,7 @@ const EditInventory: React.FC<Props> = ({ data, onChange }) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", uploadPreset);
-    formData.append("folder", "inventory");
+    formData.append("folder", "inventory/items");
 
     try {
       const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {

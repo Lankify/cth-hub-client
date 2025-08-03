@@ -3,6 +3,9 @@
 sidebar 
 when select dropdown should also appear
 
+Image Drag and drop is not working in any
+After dleet item/category still it is selced in the table cell (1 slected)
+
 AddInventory
 Replace Assigned to Input field with Dropdown (use Staff from DB)
 Categories need to fetch from db
@@ -10,17 +13,13 @@ error message beklow Iputfield m=for mandatory data
 Some Mobile Devices dont have S/N
 
 EditInventory
-Include Droposown for Ssigend to Edit Form 
-reset assigend to with staus
+Include Droposown for Ssigend to Edit Form (staff)
 
 
 
 Item Categories
 View Table + Add Button --> Popup Model to create new category
-
-API - Backend
-
-After Inventory all functions are implement do a GitHub Push
+Date Format --> change in teh table
 
 
 

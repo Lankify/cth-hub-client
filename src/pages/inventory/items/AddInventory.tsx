@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { InputField, DropdownField, DatePickerField, Button, useToast } from "../../components";
+import { InputField, DropdownField, DatePickerField, Button, useToast } from "../../../components";
 import { IoIosSave } from "react-icons/io";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CloseIcon from "@mui/icons-material/Close";
@@ -52,7 +52,7 @@ const AddInventory: React.FC = () => {
         const imgData = new FormData();
         imgData.append("file", selectedImage);
         imgData.append("upload_preset", uploadPreset);
-        imgData.append("folder", "inventory");
+        imgData.append("folder", "inventory/items");
 
         const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
           method: "POST",

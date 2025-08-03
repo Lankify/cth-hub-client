@@ -1,3 +1,4 @@
+// Inventory Item Interface
 export interface IInventory {
   _id: string;
   name: string;
@@ -10,6 +11,17 @@ export interface IInventory {
   assignedTo: string;
   assignedDate?: string;
   status: string;
+  note?: string;
+  imageUrl?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+// Item Category Interface
+export interface IItemCategory {
+  _id: string;
+  categoryId: string;
+  category: string;
   note?: string;
   imageUrl?: string;
   createdAt?: string;

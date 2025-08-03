@@ -1,11 +1,11 @@
-import * as theme from "../../theme";
+import * as theme from "../../../theme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Typography } from "@mui/material";
-import { Button, SelectionTab, Table, ActionButtons, ConfirmDialog, useToast } from "../../components";
-import { ViewItemDetails, EditInventory } from "..";
-import type { IInventory } from "../../types";
+import { Button, SelectionTab, Table, ActionButtons, ConfirmDialog, useToast } from "../../../components";
+import { ViewItemDetails, EditInventory } from "../../../pages";
+import type { IInventory } from "../../../types";
 import { MdLibraryAdd } from "react-icons/md";
 
 const Inventory: React.FC = () => {
@@ -39,7 +39,6 @@ const Inventory: React.FC = () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/inventory/find-all`);
 
-        // Ensure the data is an array before setting state
         if (Array.isArray(res.data)) {
           setAllItems(res.data);
           setFilteredItems(res.data);
@@ -80,11 +79,16 @@ const Inventory: React.FC = () => {
   }, [searchQuery, selectedCategory, allItems]);
 
   const validateForm = (data: IInventory) => {
-    const requiredFields = ["name", "serialNumber", "category", "brand", "status", "assignedTo"];
+    const requiredFields = ["name", "serialNumber", "category", "brand", "status"];
+
+    if (data.status === "In Use") {
+      requiredFields.push("assignedTo");
+    }
+
     const missingFields = requiredFields.filter(field => !data[field as keyof IInventory]?.toString().trim());
 
     if (missingFields.length > 0) {
-      alert("Please fill in all required fields.");
+      showToast("Please fill all required fields", "warning");
       return false;
     }
 
@@ -140,7 +144,9 @@ const Inventory: React.FC = () => {
   return (
     <div>
       <h2 className={theme.text["main-title"]}>Inventory Overview</h2>
-      <p className={theme.text["sub-title"]}>{filteredItems.length} items found</p>
+      <p className={theme.text["sub-title"]}>
+        {filteredItems.length} {filteredItems.length === 1 ? "item" : "items"} found
+      </p>
       <SelectionTab
         categories={["All Items", "Desktop", "Laptop", "Mobile Phone", "Camera", "Other"]}
         selectedCategory={selectedCategory}

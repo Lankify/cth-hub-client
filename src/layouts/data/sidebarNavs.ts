@@ -26,7 +26,7 @@ export const sidebarNavs: IMainMenu[] = [
     navigation: "/inventory",
     subLinks: [
       { title: "Add New Item", navigation: "/inventory/new-item" },
-      { title: "Item Categories", navigation: "/inventory/categories" },
+      { title: "Item Categories", navigation: "/inventory/item-categories" },
     ],
   },
 ];
