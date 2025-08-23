@@ -7,6 +7,7 @@ import { ViewCategoryDetails, EditItemCategory, AddItemCategory } from "../../..
 import type { AddItemCategoryRef } from "../../../pages";
 import type { IItemCategory } from "../../../types";
 import { MdLibraryAdd } from "react-icons/md";
+import { FaImage } from "react-icons/fa6";
 
 const ItemCategories: React.FC = () => {
   const [allCategories, setAllCategories] = useState<IItemCategory[]>([]);
@@ -144,7 +145,9 @@ const ItemCategories: React.FC = () => {
             imageUrl: item.imageUrl ? (
               <img src={item.imageUrl} alt="Item" style={{ width: "60px", height: "auto" }} />
             ) : (
-              "No image"
+              <div>
+                <FaImage className="text-secondary-txt/90 mb-1 text-3xl" style={{ width: "50px", height: "auto" }} />
+              </div>
             ),
             createdAt: item.createdAt
               ? new Date(item.createdAt)

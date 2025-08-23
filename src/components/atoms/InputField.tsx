@@ -21,6 +21,7 @@ interface InputFieldProps {
   error?: boolean;
   helperText?: string;
   disabled?: boolean;
+  numberOnly?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -44,7 +45,16 @@ const InputField: React.FC<InputFieldProps> = ({
   error = false,
   helperText = "",
   disabled,
+  numberOnly = false,
 }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (numberOnly) {
+      const onlyNumbers = e.target.value.replace(/\D/g, "");
+      e.target.value = onlyNumbers;
+    }
+    onChange(e);
+  };
+
   return (
     <TextField
       fullWidth={fullWidth}
@@ -54,7 +64,7 @@ const InputField: React.FC<InputFieldProps> = ({
       label={hideLabel ? undefined : label}
       value={value}
       className={className}
-      onChange={onChange}
+      onChange={handleChange}
       required={required}
       placeholder={placeholder}
       multiline={multiline}
@@ -63,6 +73,10 @@ const InputField: React.FC<InputFieldProps> = ({
       error={error}
       helperText={helperText}
       disabled={disabled}
+      inputProps={{
+        inputMode: numberOnly ? "numeric" : undefined,
+        ...inputProps,
+      }}
       InputLabelProps={{
         sx: {
           color: "var(--color-secondary-txt)",

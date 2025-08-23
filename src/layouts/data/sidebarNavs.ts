@@ -14,11 +14,11 @@ export const sidebarNavs: IMainMenu[] = [
     ],
   },
   {
-    title: "Clients",
-    navigation: "/clients",
+    title: "Contacts",
+    navigation: "/contacts",
     subLinks: [
-      { title: "Active Clients", navigation: "/clients/active" },
-      { title: "New Clients", navigation: "/clients/new" },
+      { title: "Clients", navigation: "contacts/clients" },
+      { title: "Travel Agents", navigation: "contacts/travel-agents" },
     ],
   },
   {
@@ -28,5 +28,26 @@ export const sidebarNavs: IMainMenu[] = [
       { title: "Add New Item", navigation: "/inventory/new-item" },
       { title: "Item Categories", navigation: "/inventory/item-categories" },
     ],
+  },
+  {
+    title: "Staff",
+    navigation: "/staff",
+    subLinks: [
+      { title: "Add New Staff", navigation: "/staff/new-member" },
+      { title: "User Management", navigation: "users" },
+      { title: "Roles & Permissions", navigation: "/users/roles-permissions" },
+    ],
+  },
+  {
+    title: "Settings",
+    navigation: "/settings",
+    subLinks: [
+      { title: "My Profile", navigation: "/settings/profile" },
+      { title: "Backup", navigation: "settings/backup" },
+    ],
+  },
+  {
+    title: "Logout",
+    navigation: "#",
   },
 ];

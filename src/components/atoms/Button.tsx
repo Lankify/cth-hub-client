@@ -7,8 +7,8 @@ interface CustomButtonProps {
   onClick?: () => void;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
-  bgColor?: string; // NEW
-  hoverColor?: string; // NEW
+  bgColor?: string;
+  hoverColor?: string;
   [key: string]: any;
 }
 

@@ -1,14 +1,17 @@
 import React, { type JSX, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiHome, FiClipboard, FiUsers, FiBox, FiChevronDown } from "react-icons/fi";
+import { FiHome, FiClipboard, FiBook, FiBox, FiUsers, FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
 import { sidebarNavs } from "./data";
 import logo from "../assets/logo.png";
 
 const iconMap: { [key: string]: JSX.Element } = {
   Dashboard: <FiHome />,
   "Hotel Rates": <FiClipboard />,
-  Clients: <FiUsers />,
+  Contacts: <FiBook />,
   Inventory: <FiBox />,
+  Staff: <FiUsers />,
+  Settings: <FiSettings />,
+  Logout: <FiLogOut />,
 };
 
 const Sidebar: React.FC = () => {
@@ -30,7 +33,6 @@ const Sidebar: React.FC = () => {
       <nav>
         <ul className="space-y-4">
           {sidebarNavs.map(item => {
-            // const isActive = location.pathname === item.navigation;
             const isSubActive = item.subLinks?.some(sub => location.pathname === sub.navigation);
             const isActive = location.pathname === item.navigation || isSubActive;
             const hasSubMenu = item.subLinks && item.subLinks.length > 0;
@@ -47,7 +49,18 @@ const Sidebar: React.FC = () => {
                 >
                   <Link
                     to={item.navigation}
-                    onClick={() => hasSubMenu && toggleSubMenu(item.title)}
+                    onClick={() => {
+                      if (hasSubMenu) {
+                        const isCurrentMenuActive = location.pathname === item.navigation;
+                        const isSubActive = item.subLinks?.some(sub => location.pathname === sub.navigation);
+
+                        if (isCurrentMenuActive && !isSubActive && isOpen) {
+                          toggleSubMenu(item.title);
+                        } else if (!isOpen) {
+                          toggleSubMenu(item.title);
+                        }
+                      }
+                    }}
                     className="flex flex-grow items-center gap-2"
                   >
                     <span className="text-lg">{iconMap[item.title] || <span className="w-5" />}</span>
@@ -55,7 +68,10 @@ const Sidebar: React.FC = () => {
                   </Link>
 
                   {hasSubMenu && (
-                    <div className="p-1 text-sm">
+                    <div
+                      onClick={() => toggleSubMenu(item.title)}
+                      className="cursor-pointer p-1 text-sm hover:opacity-80"
+                    >
                       <FiChevronDown
                         className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                       />

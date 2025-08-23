@@ -7,6 +7,7 @@ import { Button, SelectionTab, Table, ActionButtons, ConfirmDialog, useToast } f
 import { ViewItemDetails, EditInventory } from "../../../pages";
 import type { IInventory } from "../../../types";
 import { MdLibraryAdd } from "react-icons/md";
+import { FaImage } from "react-icons/fa6";
 
 const Inventory: React.FC = () => {
   const navigate = useNavigate();
@@ -159,9 +160,11 @@ const Inventory: React.FC = () => {
           rows={filteredItems.map(item => ({
             ...item,
             imageUrl: item.imageUrl ? (
-              <img src={item.imageUrl} alt="Item" style={{ width: "60px", height: "auto" }} />
+              <img src={item.imageUrl} alt="Item" style={{ width: "50px", height: "auto" }} />
             ) : (
-              "No image"
+              <div>
+                <FaImage className="text-secondary-txt/90 mb-1 text-3xl" style={{ width: "50px", height: "auto" }} />
+              </div>
             ),
             status: (
               <span

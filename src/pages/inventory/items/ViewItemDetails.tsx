@@ -94,6 +94,10 @@ const ViewItemDetails: React.FC<Props> = ({ data }) => {
             <div className={labelStyle}>Assigned Date</div>
             <div className={valueStyle}>{formatDate(data.assignedDate)}</div>
           </div>
+          {/* <div>
+            <div className={labelStyle}>Personal Note</div>
+            <div className={valueStyle}>{data.note || "-"}</div>
+          </div> */}
         </div>
       </div>
 

@@ -1,14 +1,18 @@
-## Inventory ##
+Task 1 Saturday
 
-sidebar 
-when select dropdown should also appear
+Fetch Email --> Username when modal opens
+Change the Colors of Input fields
+bACKEND rOUTES AND CONTORLER IS NOT IMPLMENTD
+
+
+## Inventory ##
 
 Image Drag and drop is not working in any
 After dleet item/category still it is selced in the table cell (1 slected)
 
 AddInventory
 Replace Assigned to Input field with Dropdown (use Staff from DB)
-Categories need to fetch from db
+Categories need to fetch from db *********************************************************************************
 error message beklow Iputfield m=for mandatory data
 Some Mobile Devices dont have S/N
 
@@ -16,12 +20,8 @@ EditInventory
 Include Droposown for Ssigend to Edit Form (staff)
 
 
+Staff
+Next to search bar --> Department Filter , Status Filter
 
-Item Categories
-View Table + Add Button --> Popup Model to create new category
-Date Format --> change in teh table
-
-
-
-
-If Error occured in AddInventory --> add new line in line 55 and chaneg cloudiary settings--> uplaod --> unsiged-preset--> folder --> remove folder 
+When assign role __> if already assign __> erro rmessage if no assigned
+Assigned to --> Fetch from staff db

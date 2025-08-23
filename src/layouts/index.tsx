@@ -9,7 +9,7 @@ const Layout: React.FC = () => {
       <Sidebar />
       <div className="ml-[280px] flex w-full flex-col">
         <Header />
-        <main className="flex-1 px-6 py-4 overflow-y-auto bg-primary">
+        <main className="bg-primary flex-1 overflow-y-auto px-6 py-4">
           <Outlet />
         </main>
       </div>
