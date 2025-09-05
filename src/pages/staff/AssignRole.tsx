@@ -1,4 +1,4 @@
-import type { IStaff, IUser } from "../../types";
+import type { IStaff, IUser, IUserRole } from "../../types";
 import { InputField, DropdownField } from "../../components";
 import { useUserRoles } from "../../hooks";
 import { FaImage } from "react-icons/fa";
@@ -17,7 +17,7 @@ const AssignRole: React.FC<Props> = ({ staff, user, onChange }) => {
     onChange({ ...user, [name]: value });
   };
 
-  const handleDropdown = (name: string, value: string) => {
+  const handleDropdown = (name: string, value: IUserRole) => {
     onChange({ ...user, [name]: value });
   };
 
@@ -57,13 +57,17 @@ const AssignRole: React.FC<Props> = ({ staff, user, onChange }) => {
         <div className="mb-4">
           <DropdownField
             name="role"
-            label="Role"
-            value={user.role}
+            label="User Role"
+            value={user.role?._id || ""} // Use the role ID
             options={roles.map(r => ({ label: r.name, value: r._id }))}
-            onChange={e => handleDropdown("role", e.target.value)}
+            onChange={e => {
+              const selectedRole = roles.find(r => r._id === e.target.value);
+              if (selectedRole) handleDropdown("role", selectedRole);
+            }}
             required
-            placeholder={loading ? "Loading roles..." : "Select a role"}
+            placeholder={loading ? "Loading roles..." : "Select a Role"}
           />
+
           {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
         </div>
         <div className="grid grid-cols-2 items-center gap-4">

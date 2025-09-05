@@ -18,3 +18,8 @@ export { default as AddStaffMember } from "./staff/AddStaffMember";
 export { default as ViewStaffMember } from "./staff/ViewStaffDetails";
 export { default as EditStaffMember } from "./staff/EditStaffMember";
 export { default as AssignRole } from "./staff/AssignRole";
+
+export { default as Users } from "./users";
+export { default as AddUser } from "./users/AddUser";
+export type { AddUserRef } from "./users/AddUser";
+export { default as ViewUserDetails } from "./users/ViewUserDetails";

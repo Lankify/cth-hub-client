@@ -9,12 +9,6 @@ AddInventory
 error message beklow Iputfield m=for mandatory data
 Some Mobile Devices dont have S/N
 
-EditInventory
-Include Droposown for Ssigend to Edit Form (staff)
-
 
 Staff
 Next to search bar --> Department Filter , Status Filter
-
-When assign role __> if already assign __> erro rmessage if no assigned
-Assigned to --> Fetch from staff db

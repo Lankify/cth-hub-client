@@ -3,7 +3,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import Layout from "./layouts";
-import { Dashboard, HotelRates, Inventory, AddInventory, ItemCategories, Staff, AddStaffMember } from "./pages";
+import { Dashboard, HotelRates, Inventory, AddInventory, ItemCategories, Staff, AddStaffMember, Users } from "./pages";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
             <Route path="/inventory/item-categories" element={<ItemCategories />} />
             <Route path="staff" element={<Staff />} />
             <Route path="/staff/new-member" element={<AddStaffMember />} />
+            <Route path="/users" element={<Users />} />
           </Route>
         </Routes>
       </BrowserRouter>

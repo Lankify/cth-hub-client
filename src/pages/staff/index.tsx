@@ -154,7 +154,7 @@ const Staff: React.FC = () => {
           rows={filteredStaff.map(staff => ({
             ...staff,
             profileImageUrl: staff.profileImageUrl ? (
-              <img src={staff.profileImageUrl} alt="Profile" style={{ width: "50px", height: "auto" }} />
+              <img src={staff.profileImageUrl} alt="Profile" style={{ width: "60px", height: "auto" }} />
             ) : (
               <div>
                 {" "}
@@ -205,7 +205,7 @@ const Staff: React.FC = () => {
                         setAssignRoleData({
                           staff: staff._id,
                           username: staff.email || "",
-                          role: "",
+                          role: { _id: "", name: "", permissions: [] },
                           isActive: true,
                         });
                         setAssignRoleStaff(staff);
