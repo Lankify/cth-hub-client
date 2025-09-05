@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useInventoryCategories } from "../../../hooks";
 import { InputField, DropdownField, DatePickerField, Button, useToast } from "../../../components";
 import { IoIosSave } from "react-icons/io";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -9,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 const AddInventory: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const { inventoryCategories, loading, error } = useInventoryCategories();
   const navigate = useNavigate();
   const { showToast } = useToast();
   const [formData, setFormData] = useState({
@@ -142,18 +144,19 @@ const AddInventory: React.FC = () => {
           <DropdownField
             name="category"
             label="Category"
-            placeholder="Select Category"
             value={formData.category}
             onChange={e => setFormData(prev => ({ ...prev, category: e.target.value }))}
-            options={[
-              { label: "Laptop", value: "Laptop" },
-              { label: "Desktop", value: "Desktop" },
-              { label: "Mobile Phone", value: "Mobile Phone" },
-              { label: "Camera", value: "Camera" },
-              { label: "Other", value: "Other" },
-            ]}
+            placeholder={loading ? "Loading categories..." : "Select Category"}
+            options={inventoryCategories
+              .sort((a, b) => {
+                const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                return dateA - dateB;
+              })
+              .map(i => ({ label: i.category, value: i.category }))}
             required
           />
+          {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
         </div>
 
         {/* Row 3 */}

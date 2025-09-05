@@ -12,7 +12,7 @@ export const useUserRoles = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await axios.get<IUserRole[]>(`${import.meta.env.VITE_API_BASE_URL}/user-roles/find-all`); // 👈 adjust if base URL differs
+        const res = await axios.get<IUserRole[]>(`${import.meta.env.VITE_API_BASE_URL}/user-roles/find-all`);
         setRoles(res.data);
       } catch (err: any) {
         setError(err.response?.data?.message || "Error fetching roles");

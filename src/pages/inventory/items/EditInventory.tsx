@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { IInventory } from "../../../types";
 import { InputField, DatePickerField, DropdownField } from "../../../components";
+import { useStaff, useInventoryCategories } from "../../../hooks";
 import type { SelectChangeEvent } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,14 +11,6 @@ interface Props {
   onChange: (updated: IInventory) => void;
 }
 
-const categoryOptions = [
-  { label: "Laptop", value: "Laptop" },
-  { label: "Desktop", value: "Desktop" },
-  { label: "Mobile Phone", value: "Mobile Phone" },
-  { label: "Camera", value: "Camera" },
-  { label: "Other", value: "Other" },
-];
-
 const statusOptions = [
   { label: "Available", value: "Available" },
   { label: "In Use", value: "In Use" },
@@ -26,6 +19,9 @@ const statusOptions = [
 ];
 
 const EditInventory: React.FC<Props> = ({ data, onChange }) => {
+  const { staff, loading: staffLoading, error: staffError } = useStaff();
+  const { inventoryCategories, loading: categoryLoading, error: categoryError } = useInventoryCategories();
+
   const backgroundColor = "var(--color-secondary)";
   const [previewUrl, setPreviewUrl] = useState<string | null>(data.imageUrl || null);
   const isEditable = data.status === "In Use";
@@ -160,12 +156,19 @@ const EditInventory: React.FC<Props> = ({ data, onChange }) => {
             name="category"
             label="Category"
             value={data.category || ""}
-            placeholder="Select Category"
-            options={categoryOptions}
+            placeholder={categoryLoading ? "Loading categories..." : "Select a Category"}
+            options={inventoryCategories
+              .sort((a, b) => {
+                const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                return dateA - dateB;
+              })
+              .map(i => ({ label: i.category, value: i.category }))}
             onChange={handleDropdownChange}
             backgroundColor={backgroundColor}
             required
           />
+          {categoryError && <p className="mt-1 text-sm text-red-500">{categoryError}</p>}
         </div>
       </div>
 
@@ -218,15 +221,21 @@ const EditInventory: React.FC<Props> = ({ data, onChange }) => {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <InputField
+        <DropdownField
           name="assignedTo"
           label="Assigned To"
           value={data.assignedTo ?? ""}
-          onChange={handleInput}
+          options={staff.map(r => ({
+            label: `${r.firstName} ${r.lastName}`,
+            value: `${r.firstName} ${r.lastName}`,
+          }))}
+          onChange={handleDropdownChange}
           backgroundColor={backgroundColor}
           disabled={!isEditable}
+          placeholder={staffLoading ? "Loading roles..." : "Select a Member"}
           required
         />
+        {staffError && <p className="mt-1 text-sm text-red-500">{staffError}</p>}
         <DatePickerField
           label="Assigned Date"
           value={data.assignedDate ? new Date(data.assignedDate) : null}

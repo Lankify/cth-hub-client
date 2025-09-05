@@ -1,6 +1,6 @@
 import type { IStaff, IUser } from "../../types";
 import { InputField, DropdownField } from "../../components";
-import { useUserRoles } from "../..//hooks/useUserRoles";
+import { useUserRoles } from "../../hooks";
 import { FaImage } from "react-icons/fa";
 
 interface Props {
@@ -59,9 +59,7 @@ const AssignRole: React.FC<Props> = ({ staff, user, onChange }) => {
             name="role"
             label="Role"
             value={user.role}
-            options={
-              roles.map(r => ({ label: r.name, value: r._id })) // 👈 dynamic options
-            }
+            options={roles.map(r => ({ label: r.name, value: r._id }))}
             onChange={e => handleDropdown("role", e.target.value)}
             required
             placeholder={loading ? "Loading roles..." : "Select a role"}

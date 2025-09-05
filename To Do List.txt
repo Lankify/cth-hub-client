@@ -1,18 +1,11 @@
 Task 1 Saturday
 
-Fetch Email --> Username when modal opens
-Change the Colors of Input fields
-bACKEND rOUTES AND CONTORLER IS NOT IMPLMENTD
-
-
 ## Inventory ##
 
 Image Drag and drop is not working in any
 After dleet item/category still it is selced in the table cell (1 slected)
 
 AddInventory
-Replace Assigned to Input field with Dropdown (use Staff from DB)
-Categories need to fetch from db *********************************************************************************
 error message beklow Iputfield m=for mandatory data
 Some Mobile Devices dont have S/N
 

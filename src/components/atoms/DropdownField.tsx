@@ -14,6 +14,7 @@ interface DropdownFieldProps {
   size?: "small" | "medium";
   backgroundColor?: string;
   borderColor?: string;
+  disabled?: boolean;
   selectProps?: Record<string, any>;
 }
 
@@ -30,6 +31,7 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
   size = "small",
   backgroundColor = "var(--color-primary)",
   borderColor,
+  disabled,
   selectProps = {},
 }) => {
   return (
@@ -39,6 +41,7 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
         name={name}
         value={value}
         label={label}
+        disabled={disabled}
         onChange={onChange}
         sx={{
           backgroundColor,
