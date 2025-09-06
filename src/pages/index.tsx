@@ -23,3 +23,4 @@ export { default as Users } from "./users";
 export { default as AddUser } from "./users/AddUser";
 export type { AddUserRef } from "./users/AddUser";
 export { default as ViewUserDetails } from "./users/ViewUserDetails";
+export { default as EditUser } from "./users/EditUser";

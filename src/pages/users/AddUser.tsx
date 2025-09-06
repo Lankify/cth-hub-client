@@ -19,7 +19,7 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
   const { showToast } = useToast();
   const [formData, setFormData] = useState({
     staffId: "",
-    staffObjectId: "", // <-- NEW
+    staffObjectId: "",
     staffName: "",
     username: "",
     password: "",
@@ -39,8 +39,8 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
         setFormData(prev => ({
           ...prev,
           staffId: selectedStaff.staffId,
-          staffObjectId: selectedStaff._id, // ✅ save Mongo _id here
-          staffName: selectedStaff._id, // for dropdown sync
+          staffObjectId: selectedStaff._id,
+          staffName: selectedStaff._id,
           profileImageUrl: selectedStaff.profileImageUrl || "",
           username: selectedStaff.name.split(" ")[0].toLowerCase(),
         }));
@@ -52,7 +52,7 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
         setFormData(prev => ({
           ...prev,
           staffId: selectedStaff.staffId,
-          staffObjectId: selectedStaff._id, // ✅ store ObjectId
+          staffObjectId: selectedStaff._id,
           staffName: selectedStaff._id,
           profileImageUrl: selectedStaff.profileImageUrl || "",
           username: selectedStaff.name.split(" ")[0].toLowerCase(),
@@ -60,7 +60,6 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
         setPreviewUrl(selectedStaff.profileImageUrl || null);
       }
     } else {
-      // ✅ this was missing
       setFormData(prev => ({ ...prev, [name]: value }));
     }
   };
@@ -73,7 +72,7 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
 
     try {
       const finalData = {
-        staff: formData.staffObjectId, // ✅ send Mongo ObjectId
+        staff: formData.staffObjectId,
         username: formData.username,
         password: formData.password,
         role: formData.role,
@@ -106,19 +105,20 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
 
   return (
     <div className="text-primary-txt flex flex-col gap-4 py-2">
-      {/* Image Upload */}
       <div className="flex justify-center">
         <div className="border-secondary bg-secondary hover:bg-secondary/80 relative flex h-40 w-40 cursor-pointer items-center justify-center rounded-md border-2 border-dashed transition-colors">
           {previewUrl ? (
             <img src={previewUrl} alt="Staff Profile" className="h-full w-full rounded-md object-contain" />
           ) : (
-            <span className="text-secondary-txt text-sm">Select a staff to see profile</span>
+            <span className="text-secondary-txt flex items-center justify-center text-center text-sm">
+              Select a staff to see profile
+            </span>
           )}
         </div>
       </div>
 
       <div className={subContainerStyle}>
-        <p className={labelStyle}>Select the Staff Member by Employee ID or Employee Name</p>
+        <p className={labelStyle}>Choose Staff Member by Employee ID or Name</p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <DropdownField
             name="staffId"
@@ -137,9 +137,9 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
           <DropdownField
             name="staffName"
             label="Employee Name"
-            value={formData.staffName} // now holds _id
+            value={formData.staffName}
             onChange={handleChange}
-            options={staffOptions.map(s => ({ label: s.name, value: s._id }))} // value = _id
+            options={staffOptions.map(s => ({ label: s.name, value: s._id }))}
             placeholder="Select the Member"
             backgroundColor={backgroundColor}
             required
@@ -148,7 +148,21 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
       </div>
 
       <div className={subContainerStyle}>
-        <p className={labelStyle}>Select the Role and Enter the Credentials</p>
+        <p className={labelStyle}>Assign Role and Create Login Credentials</p>
+        <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="col-span-2">
+            <DropdownField
+              name="role"
+              label="User Role"
+              value={formData.role}
+              onChange={handleChange}
+              options={roleOptions.map(r => ({ label: r.name, value: r._id }))}
+              placeholder="Select a Role"
+              backgroundColor={backgroundColor}
+              required
+            />
+          </div>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <InputField
             name="username"
@@ -164,16 +178,6 @@ const AddUser = forwardRef<AddUserRef, Props>(({ onSuccess, staffOptions, roleOp
             type="password"
             value={formData.password}
             onChange={handleChange}
-            backgroundColor={backgroundColor}
-            required
-          />
-          <DropdownField
-            name="role"
-            label="Role"
-            value={formData.role}
-            onChange={handleChange}
-            options={roleOptions.map(r => ({ label: r.name, value: r._id }))}
-            placeholder="Select a Role"
             backgroundColor={backgroundColor}
             required
           />

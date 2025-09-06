@@ -38,7 +38,7 @@ const ViewUserDetails: React.FC<Props> = ({ data }) => {
       <div className="flex justify-center">
         {typeof data.staff !== "string" ? (
           data.staff?.profileImageUrl ? (
-            <img src={data.staff?.profileImageUrl} alt="Item" className="h-40 w-40 rounded-md object-contain" />
+            <img src={data.staff?.profileImageUrl} alt="Item" className="h-40 w-40 rounded-md object-cover" />
           ) : (
             <div className="bg-secondary flex h-40 w-40 flex-col items-center justify-center rounded-md object-contain text-sm text-gray-400 dark:bg-gray-800">
               <FaImage className="mb-1 text-6xl" />

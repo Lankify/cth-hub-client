@@ -58,7 +58,7 @@ const AssignRole: React.FC<Props> = ({ staff, user, onChange }) => {
           <DropdownField
             name="role"
             label="User Role"
-            value={user.role?._id || ""} // Use the role ID
+            value={user.role?._id || ""}
             options={roles.map(r => ({ label: r.name, value: r._id }))}
             onChange={e => {
               const selectedRole = roles.find(r => r._id === e.target.value);

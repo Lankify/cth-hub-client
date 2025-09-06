@@ -2,6 +2,7 @@
 export { default as Button } from "./atoms/Button";
 export { default as InputField } from "./atoms/InputField";
 export { default as DropdownField } from "./atoms/DropdownField";
+export { default as MultiSelectDropdown } from "./atoms/MultiSelectDropdown";
 export { default as DatePickerField } from "./atoms/DatePickerField";
 export { default as SelectionTab } from "./atoms/SelectionTab";
 export { useToast, ToastProvider } from "./atoms/Toast";

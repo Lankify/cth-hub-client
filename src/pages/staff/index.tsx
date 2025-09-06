@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Typography } from "@mui/material";
-import { Button, Table, ActionButtons, ConfirmDialog, useToast } from "../../components";
+import { Button, Table, MultiSelectDropdown, ActionButtons, ConfirmDialog, useToast } from "../../components";
 import { ViewStaffMember, EditStaffMember, AssignRole } from "../../pages";
 import type { IStaff, IUser } from "../../types";
 import { FiUserPlus } from "react-icons/fi";
@@ -15,12 +15,14 @@ const Staff: React.FC = () => {
   const [allStaff, setAllStaff] = useState<IStaff[]>([]);
   const [filteredStaff, setFilteredStaff] = useState<IStaff[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState<string[]>([]);
+  const [selectedStatus, setSelectedStatus] = useState<string[]>([]);
+
   const [viewData, setViewData] = useState<IStaff | null>(null);
   const [viewOpen, setViewOpen] = useState(false);
   const [assignRoleData, setAssignRoleData] = useState<IUser | null>(null);
   const [assignRoleOpen, setAssignRoleOpen] = useState(false);
   const [assignRoleStaff, setAssignRoleStaff] = useState<IStaff | null>(null);
-
   const [editData, setEditData] = useState<IStaff | null>(null);
   const [editOpen, setEditOpen] = useState(false);
   const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
@@ -28,6 +30,20 @@ const Staff: React.FC = () => {
   const [pendingDeleteIds, setPendingDeleteIds] = useState<string[]>([]);
   const [tableKey, setTableKey] = useState(0);
   const { showToast } = useToast();
+
+  const departmentOptions = Array.from(
+    new Set(allStaff.map(staff => staff.department).filter((dep): dep is string => Boolean(dep))),
+  ).map(dep => ({
+    _id: dep,
+    name: dep,
+  }));
+
+  const statusOptions = Array.from(
+    new Set(allStaff.map(staff => staff.status).filter((dep): dep is string => Boolean(dep))),
+  ).map(dep => ({
+    _id: dep,
+    name: dep,
+  }));
 
   const columns = [
     { id: "profileImageUrl", label: "Profile", minWidth: 100 },
@@ -66,11 +82,14 @@ const Staff: React.FC = () => {
         staff.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         staff.designation.toLowerCase().includes(searchQuery.toLowerCase());
 
-      return matchesSearch;
+      const matchDepartment = selectedDepartment.length === 0 || selectedDepartment.includes(staff.department || "");
+      const matchStatus = selectedStatus.length === 0 || selectedStatus.includes(staff.status || "");
+
+      return matchesSearch && matchDepartment && matchStatus;
     });
 
     setFilteredStaff(filtered);
-  }, [searchQuery, allStaff]);
+  }, [searchQuery, allStaff, selectedDepartment, selectedStatus]);
 
   const validateForm = (data: IStaff) => {
     const requiredFields = [
@@ -259,6 +278,22 @@ const Staff: React.FC = () => {
                 placeholder="Looking for..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
+              />
+              <MultiSelectDropdown
+                label="Filter by Department"
+                value={selectedDepartment}
+                onChange={setSelectedDepartment}
+                options={departmentOptions}
+                multiple={true}
+                minWidth={200}
+              />
+              <MultiSelectDropdown
+                label="Filter by Status"
+                value={selectedStatus}
+                onChange={setSelectedStatus}
+                options={statusOptions}
+                multiple={true}
+                minWidth={200}
               />
               <Button startIcon={<FiUserPlus />} onClick={() => navigate("/staff/new-member")}>
                 New Member

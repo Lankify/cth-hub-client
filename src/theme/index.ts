@@ -4,5 +4,5 @@ export const text = {
 };
 
 export const textField = {
-  searchInput: "placeholder:text-secondary-txt border-secondary-txt flex-1 rounded-sm border bg-inherit pl-4",
+  searchInput: "placeholder:text-secondary-txt border-secondary-txt flex-1 rounded-sm border bg-primary pl-4 h-9.5",
 };

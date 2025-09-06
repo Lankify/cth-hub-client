@@ -2,8 +2,8 @@ import * as theme from "../../theme";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Typography } from "@mui/material";
-import { Button, Table, ActionButtons, ConfirmDialog, useToast } from "../../components";
-import { ViewUserDetails, EditItemCategory, AddUser } from "../../pages"; // chnage
+import { Button, Table, MultiSelectDropdown, ActionButtons, ConfirmDialog, useToast } from "../../components";
+import { ViewUserDetails, EditUser, AddUser } from "../../pages";
 import type { AddUserRef } from "../../pages";
 import type { IUser } from "../../types";
 import { useStaff, useUserRoles } from "../../hooks";
@@ -14,6 +14,8 @@ const Users: React.FC = () => {
   const [allUsers, setAllUsers] = useState<IUser[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+  const [selectedStatus, setSelectedStatus] = useState<string[]>([]);
   const [viewData, setViewData] = useState<IUser | null>(null);
   const [viewOpen, setViewOpen] = useState(false);
   const [newOpen, setNewOpen] = useState(false);
@@ -63,11 +65,15 @@ const Users: React.FC = () => {
       const matchesSearch =
         user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
         user.role?.name.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesSearch;
+
+      const matchesStatus = selectedStatus.length === 0 || selectedStatus.includes(user.isActive ? "true" : "false");
+      const matchesRole = selectedRoles.length === 0 || selectedRoles.includes(user.role?._id || "");
+
+      return matchesSearch && matchesStatus && matchesRole;
     });
 
     setFilteredUsers(filtered);
-  }, [searchQuery, allUsers]);
+  }, [searchQuery, allUsers, selectedStatus, selectedRoles]);
 
   const validateForm = (data: IUser) => {
     const requiredFields = ["username", "password", "role"];
@@ -189,16 +195,16 @@ const Users: React.FC = () => {
               {selectedIds.length === 1 ? (
                 <ActionButtons
                   onView={() => {
-                    const item = allUsers.find(i => i._id === selectedIds[0]);
-                    if (item) {
-                      setViewData(item);
+                    const user = allUsers.find(i => i._id === selectedIds[0]);
+                    if (user) {
+                      setViewData(user);
                       setViewOpen(true);
                     }
                   }}
                   onEdit={() => {
-                    const item = allUsers.find(i => i._id === selectedIds[0]);
-                    if (item) {
-                      setEditData(item);
+                    const user = allUsers.find(i => i._id === selectedIds[0]);
+                    if (user) {
+                      setEditData(user);
                       setEditOpen(true);
                     }
                   }}
@@ -226,8 +232,27 @@ const Users: React.FC = () => {
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
               />
+              <MultiSelectDropdown
+                label="Filter by Role"
+                value={selectedRoles}
+                onChange={setSelectedRoles}
+                options={roles.map(r => ({ _id: r._id, name: r.name }))}
+                multiple={true}
+                minWidth={200}
+              />
+              <MultiSelectDropdown
+                label="Filter by Status"
+                value={selectedStatus}
+                onChange={setSelectedStatus}
+                options={[
+                  { _id: "true", name: "Active" },
+                  { _id: "false", name: "Deactive" },
+                ]}
+                multiple
+                minWidth={200}
+              />
               <Button startIcon={<MdLibraryAdd />} onClick={() => setNewOpen(true)}>
-                New User Account
+                New Account
               </Button>
             </div>
           )}
@@ -268,7 +293,7 @@ const Users: React.FC = () => {
         showDividers
       />
 
-      {/* Dialog Box to View Details */}
+      {/* Dialog Box to View User Details */}
       <ConfirmDialog
         open={viewOpen}
         title="User Details"
@@ -297,11 +322,13 @@ const Users: React.FC = () => {
         showDividers
       />
 
-      {/* Dialog Box to Edit Details */}
-      {/* <ConfirmDialog
+      {/* Dialog Box to Edit User Details */}
+      <ConfirmDialog
         open={editOpen}
         title="Edit User"
-        content={editData ? <EditItemCategory data={editData} onChange={updated => setEditData(updated)} /> : null}
+        content={
+          editData ? <EditUser data={editData} onChange={updated => setEditData(updated)} roleOptions={roles} /> : null
+        }
         onClose={() => setEditOpen(false)}
         actions={[
           {
@@ -319,7 +346,7 @@ const Users: React.FC = () => {
           px: 3,
           py: 1,
         }}
-      /> */}
+      />
 
       {/* Dialog Box to Delete Details */}
       <ConfirmDialog
