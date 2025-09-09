@@ -232,9 +232,9 @@ const ItemCategories: React.FC = () => {
         }}
         actions={[
           {
-            label: createLoading ? "Creating..." : "Create",
+            label: createLoading ? "Saving..." : "Save",
             onClick: () => addCategoryRef.current?.handleSubmit(),
-            color: "info",
+            color: "primary",
             variant: "contained",
             props: { disabled: createLoading },
           },
@@ -264,7 +264,7 @@ const ItemCategories: React.FC = () => {
               setViewOpen(false);
               setViewData(null);
             },
-            color: "inherit",
+            color: "primary",
             variant: "outlined",
           },
         ]}

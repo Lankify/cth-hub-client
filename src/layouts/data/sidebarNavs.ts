@@ -17,8 +17,8 @@ export const sidebarNavs: IMainMenu[] = [
     title: "Contacts",
     navigation: "/contacts",
     subLinks: [
-      { title: "Clients", navigation: "contacts/clients" },
-      { title: "Travel Agents", navigation: "contacts/travel-agents" },
+      { title: "Clients", navigation: "/contacts/clients" },
+      { title: "Travel Agents", navigation: "/contacts/travel-agents" },
     ],
   },
   {
@@ -34,7 +34,7 @@ export const sidebarNavs: IMainMenu[] = [
     navigation: "/staff",
     subLinks: [
       { title: "Add New Staff", navigation: "/staff/new-member" },
-      { title: "User Management", navigation: "users" },
+      { title: "User Management", navigation: "/users" },
       { title: "Roles & Permissions", navigation: "/users/roles-permissions" },
     ],
   },
@@ -43,7 +43,7 @@ export const sidebarNavs: IMainMenu[] = [
     navigation: "/settings",
     subLinks: [
       { title: "My Profile", navigation: "/settings/profile" },
-      { title: "Backup", navigation: "settings/backup" },
+      { title: "Backup", navigation: "/settings/backup" },
     ],
   },
   {

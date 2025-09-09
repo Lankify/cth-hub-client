@@ -12,3 +12,7 @@ Some Mobile Devices dont have S/N
 
 Staff
 Next to search bar --> Department Filter , Status Filter
+
+
+# Inventory
+Include Brand, Status Filter Options

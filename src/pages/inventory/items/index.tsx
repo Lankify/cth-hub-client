@@ -163,7 +163,7 @@ const Inventory: React.FC = () => {
               <img src={item.imageUrl} alt="Item" style={{ width: "50px", height: "auto" }} />
             ) : (
               <div>
-                <FaImage className="text-secondary-txt/90 mb-1 text-3xl" style={{ width: "50px", height: "auto" }} />
+                <FaImage className="mb-1 text-3xl text-secondary-txt/90" style={{ width: "50px", height: "auto" }} />
               </div>
             ),
             status: (
@@ -242,7 +242,7 @@ const Inventory: React.FC = () => {
             </>
           )}
           renderToolbar={() => (
-            <div className="flex w-full items-center justify-center gap-4">
+            <div className="flex items-center justify-center w-full gap-4">
               <input
                 type="text"
                 className={`${theme.textField.searchInput} py-1`}
@@ -280,7 +280,7 @@ const Inventory: React.FC = () => {
               setViewOpen(false);
               setViewData(null);
             },
-            color: "inherit",
+            color: "primary",
             variant: "outlined",
           },
         ]}
@@ -304,7 +304,6 @@ const Inventory: React.FC = () => {
         showDividers
         contentSx={{
           maxHeight: "500px",
-          // minHeight: "400px",
           minWidth: "500px",
           overflowY: "auto",
           px: 3,

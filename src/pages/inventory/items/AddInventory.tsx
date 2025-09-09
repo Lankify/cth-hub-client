@@ -82,18 +82,18 @@ const AddInventory: React.FC = () => {
   return (
     <div className="text-primary-txt">
       <h2 className="mb-1 text-3xl font-semibold">Add New Item</h2>
-      <p className="text-secondary-txt mb-5">Fill out the details to register a new inventory item</p>
+      <p className="mb-5 text-secondary-txt">Fill out the details to register a new inventory item</p>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-secondary bg-opacity-90 grid grid-cols-1 gap-5 rounded-sm px-6 py-4 shadow-md"
+        className="grid grid-cols-1 gap-5 px-6 py-4 rounded-sm shadow-md bg-secondary bg-opacity-90"
       >
         {/* Row 1 */}
         <div className="flex justify-center">
-          <div className="border-primary bg-primary hover:bg-primary/80 relative flex h-48 w-48 cursor-pointer items-center justify-center rounded-md border-2 border-dashed transition-colors">
+          <div className="relative flex items-center justify-center w-48 h-48 transition-colors border-2 border-dashed rounded-md cursor-pointer border-primary bg-primary hover:bg-primary/80">
             {previewUrl ? (
               <>
-                <img src={previewUrl} alt="Preview" className="h-full w-full rounded-md object-contain" />
+                <img src={previewUrl} alt="Preview" className="object-contain w-full h-full rounded-md" />
                 <button
                   type="button"
                   onClick={e => {
@@ -101,7 +101,7 @@ const AddInventory: React.FC = () => {
                     setSelectedImage(null);
                     setPreviewUrl(null);
                   }}
-                  className="absolute top-1 right-1 rounded-sm bg-black/60 p-1 text-white transition hover:bg-red-600"
+                  className="absolute p-1 text-white transition rounded-sm top-1 right-1 bg-black/60 hover:bg-red-600"
                 >
                   <CloseIcon fontSize="small" />
                 </button>
@@ -109,10 +109,10 @@ const AddInventory: React.FC = () => {
             ) : (
               <label
                 htmlFor="image-upload-input"
-                className="text-primary-txt absolute inset-0 flex cursor-pointer flex-col items-center justify-center"
+                className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer text-primary-txt"
               >
                 <CloudUploadIcon className="mb-1" />
-                <span className="px-2 text-center font-semibold select-none">Click or drag & drop image here</span>
+                <span className="px-2 font-semibold text-center select-none">Click or drag & drop image here</span>
               </label>
             )}
             <input

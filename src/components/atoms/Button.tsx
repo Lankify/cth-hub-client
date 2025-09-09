@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 
 interface CustomButtonProps {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "outlined" | "contained";
   children: React.ReactNode;
   onClick?: () => void;
   startIcon?: React.ReactNode;
@@ -20,11 +20,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   endIcon,
   bgColor,
   hoverColor,
+  className, // <-- pick up className
   ...props
 }) => {
   const defaultBgColor = variant === "primary" ? "#2b5cfd" : "#2b3549";
   const defaultHoverColor = variant === "primary" ? "#1f49d1" : "#262f41";
-
   const appliedBgColor = bgColor || defaultBgColor;
   const appliedHoverColor = hoverColor || defaultHoverColor;
 
@@ -33,6 +33,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       variant="contained"
       startIcon={startIcon}
       endIcon={endIcon}
+      className={className} // <-- apply it here
       sx={{
         backgroundColor: appliedBgColor,
         color: "white",

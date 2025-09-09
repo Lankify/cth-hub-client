@@ -16,12 +16,12 @@ const formatDate = (date?: string) => {
 
 const ViewCategoryDetails: React.FC<Props> = ({ data }) => {
   return (
-    <div className="space-y-4 py-2">
+    <div className="py-2 space-y-4">
       <div className="flex justify-center">
         {data.imageUrl ? (
-          <img src={data.imageUrl} alt="Item" className="h-40 w-40 rounded-md object-contain" />
+          <img src={data.imageUrl} alt="Item" className="object-contain w-40 h-40 rounded-md" />
         ) : (
-          <div className="bg-secondary flex h-40 w-40 flex-col items-center justify-center rounded-md object-contain text-sm text-gray-400 dark:bg-gray-800">
+          <div className="flex flex-col items-center justify-center object-contain w-40 h-40 text-sm text-gray-400 rounded-md bg-secondary dark:bg-gray-800">
             <FaImage className="mb-1 text-6xl" />
             No image selected
           </div>

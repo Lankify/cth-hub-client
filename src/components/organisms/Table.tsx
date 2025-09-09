@@ -24,6 +24,7 @@ interface DataTableProps {
   columns: Column[];
   rows: any[];
   rowsPerPageOptions?: number[];
+  defaultRowsPerPage?: number; // 👈 add this
   stickyHeader?: boolean;
   transparent?: boolean;
   enableCheckbox?: boolean;
@@ -37,6 +38,8 @@ const DataTable: React.FC<DataTableProps> = ({
   columns,
   rows,
   rowsPerPageOptions = [5, 10, 25],
+  defaultRowsPerPage,
+
   stickyHeader = true,
   transparent = true,
   enableCheckbox = false,
@@ -46,7 +49,7 @@ const DataTable: React.FC<DataTableProps> = ({
   selectedRowIds,
 }) => {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
+  const [rowsPerPage, setRowsPerPage] = React.useState(defaultRowsPerPage ?? rowsPerPageOptions[0]);
   const [selectedIds, setSelectedIds] = React.useState<string[]>(selectedRowIds || []);
   const visibleRows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 

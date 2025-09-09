@@ -1,3 +1,5 @@
+export type { IHotel } from "./hotel.interface";
+export type { ITravelAgent } from "./contacts.interface";
 export type { IInventory } from "./inventory.interface";
 export type { IItemCategory } from "./inventory.interface";
 export type { IStaff } from "./staff.interface";

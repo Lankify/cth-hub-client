@@ -1,6 +1,17 @@
 export { default as Dashboard } from "./dashboard";
 
-export { default as HotelRates } from "./hotels/HotelRates";
+// export { default as Hotels } from "./hotels";
+
+export { default as Contacts } from "./contacts";
+export { default as TravelAgents } from "./contacts/travel-agents";
+export { default as AddTravelAgentOptions } from "./contacts/travel-agents/AddTravelAgentOptions";
+export { default as AddSingleTravelAgent } from "./contacts/travel-agents/AddSingleTravelAgent";
+export { default as AddMultipleTravelAgents } from "./contacts/travel-agents/AddMultipleTravelAgents";
+
+
+
+export { default as ViewTravelAgents } from "./contacts/travel-agents/ViewTravelAgent";
+export { default as EditTravelAgent } from "./contacts/travel-agents/EditTravelAgent";
 
 export { default as Inventory } from "./inventory/items";
 export { default as AddInventory } from "./inventory/items/AddInventory";
